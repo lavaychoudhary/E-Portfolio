@@ -484,6 +484,12 @@ ul {
     gap: 30px;
 }
 
+/* Center the last row if it has fewer than 3 items */
+.projects-grid .project-card:nth-last-child(2):nth-child(3n+1),
+.projects-grid .project-card:nth-last-child(1):nth-child(3n+2) {
+    /* no extra rule needed — grid handles it */
+}
+
 .project-card {
     display: flex;
     flex-direction: column;
