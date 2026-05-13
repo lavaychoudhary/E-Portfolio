@@ -205,3 +205,43 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// --- Project Modal ---
+function openProjectModal() {
+    const modal = document.getElementById('projectModal');
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    
+    // Staggered animation for step cards
+    const steps = modal.querySelectorAll('.step-card');
+    steps.forEach((step, index) => {
+        setTimeout(() => {
+            step.classList.add('visible');
+        }, 150 * (index + 1));
+    });
+}
+
+function closeProjectModal() {
+    const modal = document.getElementById('projectModal');
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    
+    // Reset step animations for next open
+    const steps = modal.querySelectorAll('.step-card');
+    steps.forEach(step => step.classList.remove('visible'));
+}
+
+// Close modal on overlay click
+document.addEventListener('click', (e) => {
+    const modal = document.getElementById('projectModal');
+    if (e.target === modal) {
+        closeProjectModal();
+    }
+});
+
+// Close modal on Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeProjectModal();
+    }
+});

@@ -213,8 +213,7 @@
                             <span>Python</span>
                             <span>Random Forest</span>
                         </div>
-                        <a href="https://github.com/lavaychoudhary/ML-Bakeoff-" target="_blank" class="project-link"><i
-                                class="fa-brands fa-github"></i> View Artifacts</a>
+                        <button class="project-link" onclick="openProjectModal()"><i class="fa-solid fa-flask"></i> View Artifacts</button>
                     </div>
 
                     <div class="project-card glass-card hover-glow">
@@ -407,6 +406,168 @@
         </footer>
 
     </main>
+
+    <!-- Project Detail Modal -->
+    <div class="project-modal-overlay" id="projectModal">
+        <div class="project-modal">
+            <button class="modal-close" onclick="closeProjectModal()"><i class="fa-solid fa-xmark"></i></button>
+            
+            <div class="modal-header">
+                <span class="modal-badge">DEEP DIVE</span>
+                <h2>Predicting Diabetes with Machine Learning</h2>
+                <p class="modal-subtitle">A Random Forest "Bake-Off" — 6-Version Iterative Pipeline</p>
+                <div class="modal-tech-stack">
+                    <span>Python</span><span>Pandas</span><span>Scikit-Learn</span><span>Matplotlib</span><span>Seaborn</span>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <div class="modal-objective glass-card">
+                    <h3><i class="fa-solid fa-bullseye"></i> Objective</h3>
+                    <p>To build a robust predictive model for early diabetes detection using the Pima Indians Diabetes Dataset, optimizing the model through an iterative, 6-version "Bake-off" pipeline.</p>
+                </div>
+
+                <h3 class="journey-title"><i class="fa-solid fa-road"></i> The Journey: From Raw Data to Clinical Reliability</h3>
+                <p class="journey-intro">Machine learning is rarely a straight line. To find the most reliable model, I didn't just tune hyperparameters—I iterated on the data itself.</p>
+
+                <div class="steps-timeline">
+                    <!-- Step 1 -->
+                    <div class="step-card" data-step="1">
+                        <div class="step-number">01</div>
+                        <div class="step-content">
+                            <h4>The Data Reality Check <span class="step-tag">Handling Missing Values</span></h4>
+                            <p>A critical first step was realizing that in medical data, a "0" for Glucose or BMI is biologically impossible—it means the data is missing, not zero.</p>
+                            <div class="step-details">
+                                <div class="detail-item">
+                                    <strong>Initial Approach:</strong> Converted invalid zeros to NaN and replaced them with the dataset's median value.
+                                </div>
+                                <div class="detail-item highlight">
+                                    <strong>Advanced Approach (V3):</strong> Upgraded to K-Nearest Neighbors (KNN) imputation, allowing the algorithm to estimate missing values based on similar patient profiles.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="step-card" data-step="2">
+                        <div class="step-number">02</div>
+                        <div class="step-content">
+                            <h4>Adding Feature Engineering <span class="step-tag">Domain Knowledge</span></h4>
+                            <p>Instead of letting the model figure everything out from scratch, I engineered new features to give it a head start:</p>
+                            <div class="feature-pills">
+                                <div class="feature-pill">
+                                    <strong>Glucose_Risk</strong>
+                                    <span>Binary flag identifying patients with dangerously high Glucose levels (&gt; 140)</span>
+                                </div>
+                                <div class="feature-pill">
+                                    <strong>BMI_Category</strong>
+                                    <span>Grouping continuous BMI numbers into established medical tiers (Normal, Overweight, Obese)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="step-card" data-step="3">
+                        <div class="step-number">03</div>
+                        <div class="step-content">
+                            <h4>Establishing the Baseline <span class="step-tag">Versions 1 & 2</span></h4>
+                            <p>I started by training a standard Random Forest Classifier.</p>
+                            <div class="version-comparison">
+                                <div class="version-box">
+                                    <div class="version-label">V1</div>
+                                    <div class="version-info">
+                                        <span class="metric">100 trees</span> · depth 10
+                                        <div class="metric-result"><strong>85.7%</strong> accuracy · <strong>0.947</strong> ROC-AUC</div>
+                                    </div>
+                                </div>
+                                <div class="version-box">
+                                    <div class="version-label">V2</div>
+                                    <div class="version-info">
+                                        <span class="metric">300 trees</span> · depth 10
+                                        <div class="metric-result"><strong>86.4%</strong> accuracy — <em>diminishing returns</em></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="step-card" data-step="4">
+                        <div class="step-number">04</div>
+                        <div class="step-content">
+                            <h4>The Data-Centric Sweet Spot <span class="step-tag best">Version 3 — Best Model</span></h4>
+                            <p>This was the most medically viable model. By combining the KNN imputation, engineered features, and setting <code>class_weight='balanced'</code> to account for the dataset's natural imbalance, I created a model focused on clinical reliability.</p>
+                            <div class="insight-box">
+                                <i class="fa-solid fa-star"></i>
+                                <span>While accuracy remained stable (86.4%), the model's <strong>Precision jumped</strong> — it became highly reliable at ensuring that when it predicted "Diabetic," it was actually correct, reducing harmful false positives.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div class="step-card" data-step="5">
+                        <div class="step-number">05</div>
+                        <div class="step-content">
+                            <h4>Falling into the Overfitting Trap <span class="step-tag warning">Versions 4 & 5</span></h4>
+                            <p>To push the algorithm's limits, I ran a "Hit & Trial" phase.</p>
+                            <div class="version-comparison">
+                                <div class="version-box danger">
+                                    <div class="version-label">V4</div>
+                                    <div class="version-info">
+                                        10 trees · unrestricted depth
+                                        <div class="metric-result"><strong>89.6%</strong> accuracy — <em class="text-danger">but ROC-AUC dropped. Overfitting!</em></div>
+                                    </div>
+                                </div>
+                                <div class="version-box danger">
+                                    <div class="version-label">V5</div>
+                                    <div class="version-info">
+                                        Only 5 trees
+                                        <div class="metric-result"><em class="text-danger">Highly unstable predictions — too few trees</em></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 6 -->
+                    <div class="step-card" data-step="6">
+                        <div class="step-number">06</div>
+                        <div class="step-content">
+                            <h4>The Volume Check <span class="step-tag">Version 6</span></h4>
+                            <p>Altered the train/test split from 80/20 to 70/30. The reduction in training data caused a dip in model confidence and accuracy, confirming that for small datasets (under 1,000 samples), <strong>maximizing training data volume is essential</strong>.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Takeaways -->
+                <div class="takeaways-section">
+                    <h3><i class="fa-solid fa-lightbulb"></i> Key Takeaways</h3>
+                    <div class="takeaway-cards">
+                        <div class="takeaway-card">
+                            <div class="takeaway-icon"><i class="fa-solid fa-database"></i></div>
+                            <h4>Data Beats Algorithms</h4>
+                            <p>The biggest leap in clinical reliability came from engineering the Glucose_Risk feature and using intelligent KNN imputation — not from tripling the number of trees.</p>
+                        </div>
+                        <div class="takeaway-card">
+                            <div class="takeaway-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                            <h4>Accuracy is a Liar</h4>
+                            <p>Version 4 had the highest accuracy (89.6%) but was dangerously overfit. ROC-AUC and Precision provided a much truer picture of diagnostic power.</p>
+                        </div>
+                        <div class="takeaway-card">
+                            <div class="takeaway-icon"><i class="fa-solid fa-sliders"></i></div>
+                            <h4>Hyperparameter Ceilings</h4>
+                            <p>Once an ensemble reaches critical mass, further tuning yields minimal returns compared to cleaning and understanding the data.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <a href="https://github.com/lavaychoudhary/ML-Bakeoff-" target="_blank" class="btn btn-primary"><i class="fa-brands fa-github"></i> View on GitHub</a>
+            </div>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/tsparticles-engine@2/tsparticles.engine.min.js"></script>
