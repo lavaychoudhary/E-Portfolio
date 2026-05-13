@@ -530,6 +530,27 @@ ul {
     font-family: var(--font-mono);
 }
 
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 15px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent-hover);
+    border: 1px solid rgba(79, 70, 229, 0.3);
+    transition: var(--transition);
+}
+
+.project-link:hover {
+    background: var(--accent-color);
+    color: #fff;
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
 /* Resume Section */
 .resume-grid {
     display: grid;
